@@ -15,7 +15,7 @@
     <category field="generic-base"/>
     <issn>0028-0836</issn>
     <eissn>1476-4687</eissn>
-    <updated>2024-12-07T17:00:00+00:00</updated>
+    <updated>2025-03-03T11:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="title">
@@ -38,13 +38,6 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="doi:"/>
-      </if>
-    </choose>
-  </macro>
-  <macro name="access-data">
-    <choose>
-      <if type="dataset software" match="any">
         <text variable="DOI" prefix="https://doi.org/"/>
       </if>
     </choose>
@@ -93,7 +86,14 @@
       </else-if>
       <else-if type="report webpage post post-weblog" match="any">
         <group delimiter=" ">
-          <text variable="URL"/>
+          <choose>
+            <if variable="DOI">
+              <text variable="DOI" prefix="https://doi.org/"/>
+            </if>
+            <else>
+              <text variable="URL"/>
+            </else>
+          </choose>
           <date date-parts="year" form="text" variable="issued" prefix="(" suffix=")"/>
         </group>
       </else-if>
@@ -160,8 +160,8 @@
         <text macro="editor"/>
         <text macro="volume"/>
         <text variable="page"/>
-        <text macro="issuance"/>
         <text macro="access"/>
+        <text macro="issuance"/>
       </group>
     </layout>
   </bibliography>
